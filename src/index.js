@@ -3,10 +3,54 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Router } from "react-router-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import createHistory from "history/createBrowserHistory";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+import rootReducer from './reducers/rootReducer';
+
+const saveToLocalStorage = (state) =>
+{
+  try
+  {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("state", serializedState);
+  }
+  catch(err)
+  {
+    console.log(err);
+  }
+}
+
+const loadFromLocalStorage = () =>
+{
+  try
+  {
+    const serializedState = localStorage.getItem("state");
+    if(serializedState == null) return undefined;
+    return JSON.parse(serializedState);
+  }
+  catch(err)
+  {
+    console.log(err);
+    return undefined;
+  }
+}
+
+const persistedState = loadFromLocalStorage();
+const store = createStore(rootReducer, persistedState, composeWithDevTools());
+store.subscribe(() => saveToLocalStorage(store.getState()));
+
+const history = createHistory();
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router history = {history}>
+    <Provider store = {store}>
+      <App />
+    </Provider>
+  </Router>,
   document.getElementById('root')
 );
 

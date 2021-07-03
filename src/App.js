@@ -1,15 +1,25 @@
 import React from "react";
-import LandingPage from "./components/LandingPage"
+import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+
+import LandingPage from "./components/LandingPage/LandingPage"
+import CreateQuizPage from "./components/createQuizPage/createQuizPage";
 
 import 'antd/dist/antd.css';
 
-function App() {
+const App = () =>
+{
   return (
-    // <div className="App">
-    //   Quiz App
-    // </div>
-    <LandingPage/>
-  );
+    <Switch>
+      <Route exact path = "/" component = {() => <LandingPage />} />
+      <Route exact path = "/create/:quiz_name" component = {() => <CreateQuizPage />} />
+    </Switch>
+  )
 }
 
-export default App;
+const mapStateToProps = (state) =>
+{
+  return {quiz: state.quiz};
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,0 +1,51 @@
+#createQuizPage
+{
+    background-color: #444444;
+    height: 100vh;
+}
+
+.createQuizPage__form
+{
+    padding: 5% !important;
+    justify-content: center !important;
+}
+
+.createQuizPage__form h1, label
+{
+    color: #EDEDED !important;
+}
+
+.createQuizPage__form .ant-radio-button-wrapper
+{
+    color: #171717 !important;
+    border: none !important;
+}
+
+.createQuizPage__form .ant-radio-button-wrapper-checked
+{
+    color: #EDEDED !important;
+    background-color: #DA0037 !important;
+    border: none !important;
+}
+
+.createQuizPage__form > .ant-row
+{
+    justify-content: center;
+}
+
+.createQuizPage__form input
+{
+    width: 50%;
+}
+
+.createQuizPage__quiz-round
+{
+    border: 1px grey;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+.createQuizPage__form .ant-space-item
+{
+    color: #EDEDED !important;
+}
