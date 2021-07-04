@@ -4,8 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Router } from "react-router-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 import createHistory from "history/createBrowserHistory";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -40,7 +41,8 @@ const loadFromLocalStorage = () =>
 }
 
 const persistedState = loadFromLocalStorage();
-const store = createStore(rootReducer, persistedState, composeWithDevTools());
+
+const store = createStore(rootReducer, persistedState, composeWithDevTools(applyMiddleware(thunk)));
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
 const history = createHistory();

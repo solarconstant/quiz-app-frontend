@@ -5,3 +5,11 @@ export const setQuizName = (payload = {}) =>
         payload
     }
 };
+
+export const setRounds = (payload = {}) =>
+{
+    return {
+        type: "SET_ROUNDS",
+        payload
+    }
+}
