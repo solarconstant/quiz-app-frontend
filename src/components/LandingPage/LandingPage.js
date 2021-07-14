@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
 import { connect, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Form, Input, Button } from 'antd';
+
+import { setQuizName } from '../../actions/quizAction';
+import { setQuizzerName, setQuizzerAvatar } from "../../actions/userAction";
  
 import "./LandingPage.css";
-import { Form, Input, Button } from 'antd';
-import { setQuizName } from '../../actions/quizAction';
+
+const avatars = [
+  "https://i.ibb.co/XJ7BqGD/User-1.png",
+  "https://i.ibb.co/4ZxvFcB/User-2.png",
+  "https://i.ibb.co/WtJ0hzF/User-3.png",
+  "https://i.ibb.co/J2Z8Y55/User-4.png",
+  "https://i.ibb.co/c3fcZw9/User-5.png",
+  "https://i.ibb.co/rk8kWs3/User-6.png",
+  "https://i.ibb.co/Db5xcxn/User-7.png",
+  "https://i.ibb.co/zbsdmTP/User-8.png"
+]
 
 const CreateQuizForm = () => {
   const [form] = Form.useForm();
@@ -39,7 +52,25 @@ const CreateQuizForm = () => {
 
 const JoinQuizForm = () => {
     const [form] = Form.useForm();
-  
+    const [code, setCode] = useState();
+    const [quizzername, setQuizzername] = useState();
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const joinQuiz = () =>
+    {
+      // some axios code
+      // if code exists and username is unique
+      if(quizzername && code)
+      {
+        dispatch(setQuizzerName(quizzername));
+        dispatch(setQuizzerAvatar(avatars[Math.floor(Math.random() * (avatars.length + 1))]));
+        history.push(`/quiz/${code}`);
+      }
+      else
+        alert("Please fill all fields.")
+    }
+
     return (
       <Form
         form={form}
@@ -47,11 +78,14 @@ const JoinQuizForm = () => {
       >
         
         <Form.Item label="Quiz Code" tooltip="This is a required field">
-          <Input required className = "join-quiz-input" placeholder="Enter the Quiz Code" />
+          <Input required className = "join-quiz-input" placeholder="Enter the Quiz Code" onChange = {(e) => setCode(e.target.value)} />
+        </Form.Item>
+        <Form.Item label="Quizzer Name" tooltip="This is a required field">
+          <Input required className = "join-quiz-input" placeholder="Enter your Name" onChange = {(e) => setQuizzername(e.target.value)} />
         </Form.Item>
         
         <Form.Item>
-          <Button type="primary" id="JoinQuizButton">Join</Button>
+          <Button onClick = {() => joinQuiz()} type="primary" id="JoinQuizButton">Join</Button>
         </Form.Item>
       </Form>
     );
@@ -74,7 +108,7 @@ const LandingPage=()=>{
 
 const dispatchStateToProp = (state) =>
 {
-  return {quizname: state.quizname}
+  return {quizname: state.quizname, user_name: state.user.name, user_avatar: state.user.avatar}
 }
 
 export default connect(dispatchStateToProp)(LandingPage);

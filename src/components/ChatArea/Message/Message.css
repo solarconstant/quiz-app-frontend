@@ -1,0 +1,14 @@
+.Message__user-avatar
+{
+    height: 40px;
+}
+
+.Message__user-message
+{
+    padding: 2%;
+}
+
+.Message_time
+{
+    text-align: right;
+}

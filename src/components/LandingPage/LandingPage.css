@@ -16,7 +16,9 @@
     padding-left: 5%;
     padding-right: 5%;
 }
-.bottomPane{
+.bottomPane
+{
+    padding-top: 10%;
     background-color: #DA0037;
     float: right;
 }
@@ -75,10 +77,19 @@
     box-shadow: none;
 }
 
-.join-quiz-input, .create-quiz-input
+.create-quiz-input
 {
     height: 100px;
     font-size: 50px !important;
+    font-weight:normal;
+    border: none;
+    border-radius: 10px !important;
+}
+
+.join-quiz-input
+{
+    height: 50px;
+    font-size: 25px !important;
     font-weight:normal;
     border: none;
     border-radius: 10px !important;

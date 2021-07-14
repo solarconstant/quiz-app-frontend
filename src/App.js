@@ -3,7 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import LandingPage from "./components/LandingPage/LandingPage"
-import CreateQuizPage from "./components/createQuizPage/createQuizPage";
+import CreateQuizPage from "./components/CreateQuizPage/createQuizPage";
+import QuizPage from "./components/QuizPage/quizPage";
 
 import 'antd/dist/antd.css';
 
@@ -13,6 +14,7 @@ const App = () =>
     <Switch>
       <Route exact path = "/" component = {() => <LandingPage />} />
       <Route exact path = "/create/:quiz_name" component = {() => <CreateQuizPage />} />
+      <Route exact path = "/quiz/:id" component = {() => <QuizPage />} />
     </Switch>
   )
 }
